@@ -1,0 +1,231 @@
+
+SELECT :
+ 
+Use OF SELECT statement- Used to retrieve a data from table : a column /Multiple columns
+ 
+SQL language is not case sensitive.
+ 
+SELECT <coulmn name>from <table_name>;
+ 
+SELECT ALL column_name from <table_name>;
+ 
+USING DISTINCT Keyword--retrieve a unique record
+ 
+ 
+SELECT*FROM <table_name>;---- inclues all the columns
+ 
+Using aliases:
+
+------------
+ 
+SELECT ID Employee_ID ,ename "Employee name" FROM emp;
+ 
+Using Concatenation operator ||
+ 
+SELECT ID||' is '||name DETAILS from demo;
+ 
+ 
+NVL:
+ 
+NVL(arg1,arg2)-Will check the first argument 
+
+               if it is NULL, it will return arg2.
+
+               ELSE
+
+               It  will return the first arg
+ 
+ 
+WHERE clause:
+
+-------------
+ 
+To filter record values
+ 
+ 
+number,string,date
+ 
+DUAL:
+
+-----
+
+contains only one row and column.
+ 
+VALUES- X
+ 
+SYS is an owner
+ 
+ 
+DATE FUNCTIONS:
+
+--------------
+ 
+MONTHS_BETWEEN: SELECT MONTHS_BETWEEN (SYSDATE,'03-FEB-1994')/12 AGE from DUAL;
+ 
+OPERATORS:
+
+----------
+ 
+<>,!= (NOT EQUAL TO)
+ 
+= < > <= >=
+ 
+IN,NOT IN - Validates with list of values
+ 
+BETWEEN , NOT BETWEEN - RAnge
+ 
+NULL - validates with null
+ 
+LIKE - search with Pattern (%(Matches with multiple char),_(Matches with exactly one char)) CASE SENSITIVE
+ 
+ 
+A%  --- First letter should be A
+ 
+%A  ---- the ending  letter should be A
+ 
+A_A_A ------ First letter,Third,Fifth letter should be A
+ 
+A_S% ----- first letter should be A,Second letter can be anything, third latter should be S, After S there can be any char
+ 
+ 
+ARITHMETIC OPERATORS:
+
+---------------------
+ 
++ - * /
+ 
+LOGICAL OPERATORS:
+
+------------------
+
+AND -- Both condition should be true
+
+OR -- any one can be true
+
+NOT -- can be used with IN , BETWEEN , LIKE
+ 
+ 
+USING ORDER BY:
+
+---------------
+
+used to sort the result set
+ 
+Ascending Order -- ASC ( default)
+ 
+Descnding order -DESC
+ 
+can be used with ither column name or column position
+ 
+It should used after from / WHERE clause
+ 
+SELECT* FROM <table_name> WHERE <condition> ORDER  BY ASC/DESC
+ 
+             
+ 
+ 
+SELECT=>data Querying Lang, Read only
+ 
+SELECT*FROM scott.emp;
+
+SELECT empno as employee_number,ename as name FROM scott.emp;
+
+SELECT empno||' name is '||ename  FROM scott.emp;
+
+SELECT empno||ename FROM scott.emp;
+
+--unique values from a column
+
+SELECT DISTINCT(deptno) FROM scott.emp;
+
+--sort ,default is ASC
+
+SELECT ename from scott.emp ORDER BY ename;
+
+SELECT ename from scott.emp ORDER BY ename DESC;
+
+SELECT * from scott.emp ORDER BY deptno;
+
+--sort using column position
+
+SELECT * from scott.emp ORDER BY 4;
+
+SELECT ename,deptno,mgr from scott.emp ORDER BY 1,3;
+ 
+SELECT*FROM scott.emp;
+
+SELECT comm from scott.emp;
+
+--to treat the null vlaues ,1 st arg is null, it will be replcaed by the second arg
+
+SELECT NVL(comm,0) FROM scott.emp;
+
+SELECT NVL(10,20) FROM DUAL;
+
+SELECT  empno,ename,sal+NVL(comm,0) as TOTAL_SAL from scott.emp;
+
+--rowid(will never change) physical address row num-number(change) for your record
+
+SELECT rowid,rownum,ename FROM scott.emp WHERE ename like 'S%';
+
+--Where
+
+SELECT*FROM scott.emp WHERE deptno=10;
+
+SELECT*FROM scott.emp WHERE deptno>10;
+
+--all the cond should be true
+
+SELECT*FROM scott.emp WHERE deptno=20 AND ename='SMITH';
+
+--any one condition is true
+
+SELECT*FROM scott.emp WHERE deptno=20 OR ename='SMITH';
+
+SELECT*FROM scott.emp WHERE deptno BETWEEN 10 and 20;
+
+--to display the NULL values
+
+SELECT * FROM scott.emp WHERE comm IS NULL;
+
+SELECT * FROM scott.emp WHERE comm IS NOT NULL ;
+
+--not equal to 10
+
+SELECT*FROM scott.emp WHERE deptno!=10;
+
+SELECT*FROM scott.emp WHERE deptno<>10;
+
+--months_between
+
+SELECT sysdate from DUAL;
+
+SELECT CURRENT_TIMESTAMP from DUAL;
+
+SELECT MONTHS_BETWEEN(sysdate,'11-NOV-2019') FROM DUAL;
+
+SELECT MONTHS_BETWEEN(sysdate,hiredate)/12 FROM scott.emp;
+ 
+CREATE TABLE emp_sug (id number,DOJ date);
+
+INSERT INTO emp_sug values(1,sysdate);
+
+SELECT*FROM emp_sug;
+
+--deptno=10 OR deptno=11 OR deptno=20
+
+SELECT*FROM scott.emp WHERE deptno IN(10,11,20);
+
+SELECT*FROM scott.emp WHERE deptno NOT IN(10,11,20);
+ 
+--LIKE  % _ wild card char
+
+select ename FROM scott.emp WHERE ename LIKE 'SM%';
+
+select ename FROM scott.emp WHERE ename LIKE '%H';
+
+select ename FROM scott.emp WHERE ename LIKE 'J%N';
+
+SELECT ename FROM scott.emp WHERE ename LIKE 'S_I%';
+
+ 

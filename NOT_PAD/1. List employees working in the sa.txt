@@ -1,0 +1,110 @@
+1. List employees working in the same location as the 'ACCOUNTING' department.
+Use a subquery to find the location of the 'ACCOUNTING' department and then filter employees based on that location.
+
+2. Find employees who earn more than the average salary of the 'SALES' department.
+Write a subquery to calculate the average salary for department 30 and then filter employees who earn above that amount.
+
+
+3.Display the names of all employees who work in a department located in 'DALLAS'.
+Use a subquery to identify the department number for the 'DALLAS' location and retrieve employees in that department.
+
+
+
+
+Medium Level
+1. List employees who have a salary greater than the maximum salary in the 'RESEARCH' department.
+Use a subquery to get the maximum salary of department 20, and then filter employees who earn more than that amount.
+
+
+
+2. Find departments where the average salary of employees is greater than 2000.
+Write a subquery to calculate the average salary per department and filter the results where the average is more than 2000.
+
+
+3. Retrieve the details of employees whose salary is higher than any clerk’s salary in department 10.
+Use a subquery to find the salary of all clerks in department 10 and retrieve employees whose salary is higher than any of those values.
+
+
+
+
+Difficult Level
+1.Find the names of employees who earn more than the average salary of all managers.
+Use a subquery to calculate the average salary of employees with the job title 'MANAGER' and then find employees who earn more than that average.
+
+
+
+
+2.List the names of employees who work in the same department as any employee with the job title 'ANALYST'.
+Write a subquery to find the department numbers of all analysts and then use these department numbers to retrieve other employees in those departments.
+
+
+
+
+3.Find employees whose salary is higher than the average salary of all employees in their own department.
+Use a correlated subquery to calculate the average salary of each employee’s department and filter employees based on this average.
+
+
+
+SELECT ENAME, JOB, DEPTNO
+FROM EMP
+WHERE DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = 'ACCOUNTING');
+ 
+Find employees who earn more than the average salary of the 'SALES' department.
+ 
+ 
+SELECT ENAME, JOB, SAL
+FROM EMP
+WHERE SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = 30);
+Display the names of all employees who work in a department located in 'DALLAS'.
+ 
+SELECT ENAME, JOB, DEPTNO
+FROM EMP
+WHERE DEPTNO = (SELECT DEPTNO FROM DEPT WHERE LOC = 'DALLAS');
+Medium Level
+List employees who have a salary greater than the maximum salary in the 'RESEARCH' department.
+ 
+SELECT ENAME, JOB, SAL
+FROM EMP
+WHERE SAL > (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = 20);
+ 
+Find departments where the average salary of employees is greater than 2000.
+ 
+
+
+-------------------------------------------------------------------------------------------
+ 
+SELECT DNAME, DEPTNO
+FROM DEPT
+WHERE DEPTNO IN (SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) > 2000);
+ 
+Retrieve the details of employees whose salary is higher than any clerk’s salary in department 10.
+ 
+ 
+SELECT ENAME, JOB, SAL, DEPTNO
+FROM EMP
+WHERE SAL > (SELECT MIN(SAL) FROM EMP WHERE JOB = 'CLERK' AND DEPTNO = 10);
+ 
+Difficult Level
+ 
+Find the names of employees who earn more than the average salary of all managers.
+ 
+ 
+SELECT ENAME, JOB, SAL
+FROM EMP
+WHERE SAL > (SELECT AVG(SAL) FROM EMP WHERE JOB = 'MANAGER');
+ 
+List the names of employees who work in the same department as any employee with the job title 'ANALYST'.
+ 
+ 
+SELECT ENAME, JOB, DEPTNO
+FROM EMP
+WHERE DEPTNO IN (SELECT DISTINCT DEPTNO FROM EMP WHERE JOB = 'ANALYST');
+ 
+Find employees whose salary is higher than the average salary of all employees in their own department.
+ 
+ 
+SELECT ENAME, JOB, SAL, DEPTNO
+FROM EMP e
+WHERE SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = e.DEPTNO);
+
+Aniket@123

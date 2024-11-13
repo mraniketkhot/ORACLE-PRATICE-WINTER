@@ -1,0 +1,306 @@
+--Use SCOTT.EMP table
+ 
+1.Retrieve all records from the employee table, but ensure that each job title appears only once.
+ 
+2.Display employee IDs and names, with the columns labeled as "Employee_ID" and "Employee_Name".
+
+Show each employee's ID and name formatted as ID:1, Name:suganya.
+ 
+3.Display employee names along with their commission. If the commission is NULL, show it as "No Commission".
+ 
+4.Retrieve the names of employees who earn a salary greater than 2000 and belong to department 20.
+ 
+5.Calculate the number of years an employee named 'SMITH' has been with the company.
+ 
+6.Retrieve the names of employees who work in either department 10 or 20.
+ 
+7.Retrieve each employee's name along with their annual salary (salary multiplied by 12).
+ 
+8.Display the list of employees in ascending order of their salary. If two employees have the same salary, order them by name in descending order.
+ 
+9. Display names of employees that contain the letters 'MI' anywhere within the name.
+ 
+10.Retrieve employees with a name pattern where the first letter is 'A', the third letter is 'L', and there are exactly four letters in the name.
+ 
+Pls try these.. will connect at 12 again-- will discuss functions 
+ 
+1.SELECT distinct(job) from scott.emp;
+ 
+2.SELECT 'ID:'|| EMPNO as Employee_ID, 'Name:'||ENAME as Employee_Name FROM scott.emp;
+ 
+3.SELECT empno , NVL(TO_CHAR(comm),'No commission') from scott.emp;
+ 
+4.SELECT ename from scott.emp where sal>2000 and deptno=20;
+ 
+5.SELECT months_between (sysdate,hiredate)/12 as Number_of_Years from scott.emp where ename ='SMITH';
+ 
+6.SELECT ename as Employee_Name from scott.emp where deptno in (10,20);
+ 
+7.SELECT ename as Employee_Name ,(sal*12) as Annual_Salary from scott.emp;
+ 
+8.SELECT ename as Employee_Name from scott.emp order by sal, ename desc;
+ 
+9.SELECT ename as Employee_Name from scott.emp where ename like('%MI%');
+ 
+10.SELECT ename as Employee_Name from scott.emp where ename like('A_L_');
+ 
+Will Start at 12 
+ 
+will start in 5 mins 
+ 
+SELECT ename AS "Employee_Name",NVL(TO_CHAR(comm),'NO COMMISION') AS "COMMISION" FROM scott.emp;
+ 
+order by salary asc, ename desc
+ 
+can you write 3 query here
+ 
+SELECT ename AS "Employee_Name",NVL(comm,0) AS "COMMISION" FROM scott.emp;
+ 
+COELESE (null,null,10,30,null)=>10
+ 
+9-10=>-1
+ 
+mam is there any particular function that will not allow some type of data
+ 
+EEE-ECE,CSE
+ 
+DAY 6:FUNCTIONS
+
+Aggregate Functions
+ 
+Takes a set of values and retruns one result..
+ 
+--ignores null values
+ 
+SUM,COUNT,MIN,MAX,AVG,COUNT(*)
+ 
+--------------------------------------------------------------
+ 
+Retrieval using GROUP BY and HAVING:
+ 
+Column which is used aggregate function called aggregate column.
+ 
+--> you cannot use aggregate column for group by
+
+--> It can not be used alone.. always used with aggregate function
+
+--> It must include all the Non - Aggregate column in group by clause
+ 
+Grouping more than one column..
+ 
+HAVING clause:
+ 
+Where - used to restrict the rows
+ 
+Having used to restrict the group
+ 
+ 
+SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY
+ 
+SHOW the diff bw having and where clause slide
+ 
+ 
+CLASS=total
+ 
+Girls BOYS
+ 
+ 
+Single row functions :
+
+----------------------
+ 
+Char functions:CONCAT,INITCAP,UPPER,LOWER,LENGTH,LTRIM,RTRIM,LPAD,RPAD,REPLACE,TRANSLATE,INSTR,SUBSTR
+ 
+select LENGTH('suganya'),INSTR('suganya','a'),REPLACE('suganya','ga','welocme'),SUBSTR('suganya',2,3) from dual;
+ 
+output:
+ 
+7	4	suwelocmenya        uga
+ 
+--------------------------
+ 
+SELECT INITCAP('suganya'),UPPER('suganya'),LOWER('Suganya') from dual;
+ 
+Output:
+
+Suganya	SUGANYA	suganya
+ 
+-----------------------------
+ 
+SELECT concat('welcome','suganya')from dual;
+ 
+Output:
+
+welcomesuganya
+
+---------------------------------------
+ 
+SELECT LTRIM('VIKADAKAVI','VI'),RTRIM('VIKADAKAVI','VI') from dual;
+ 
+output:
+ 
+KADAKAVI	VIKADAKA
+ 
+-----------------------------------------------------------
+
+SELECT TRANSLATE ('I WORK FOR ACCENTURE','AEIOU','12345') FROM DUAL;
+ 
+output:
+ 
+3 W4RK F4R 1CC2NT5R2
+ 
+-----------------------------------------------
+ 
+SELECT LPAD('suganya',10,'*'),RPAD('suganya',10,'*') FROM dual;
+ 
+output:
+ 
+***suganya	suganya***
+
+---------------------------------------------------------------
+ 
+Numeric functions:
+ 
+ROUND :
+ 
+SELECT ROUND(123.346412) from dual;
+ 
+123
+ 
+SELECT ROUND(123.343412,2) from dual;
+ 
+123.34
+ 
+SELECT ROUND(123.346412,2) from dual;
+ 
+123.35
+
+----------------------------------------------------------------
+ 
+CONVERSION FUNCTIONS:
+
+--------------------
+ 
+implicit and explicit conversions
+ 
+commonly used conversion functions:
+ 
+TO_CHAR - Converts a number or date to char values , show the slide for format mask
+ 
+SELECT TO_char(sysdate,'month')from dual;
+ 
+july
+ 
+SELECT TO_char(sysdate,'mon')from dual;
+ 
+jul
+ 
+----------------------------------------------------
+
+TO_DATE - converts string to date value
+ 
+SELECT TO_DATE('03/02/1994','dd/mm/yyyy') from dual;
+ 
+03-FEB-94
+
+------------------------------------------------------
+ 
+ 
+TO_NUMBER - converts string to number,
+ 
+insert into demo(id) values(to_number('1'));
+
+1 row inserted
+ 
+ 
+insert into demo(id) values(to_number('a'));
+ 
+Error starting at line : 3 in command -
+
+insert into demo(id) values(to_number('a'))
+
+Error report -
+
+ORA-01722: invalid number
+ 
+SELECT TO_number('123,456',999999)from dual;
+ 
+123456
+ 
+-----------------------------------------------------
+ 
+SUGANYANPT@Yahoo.COM
+ 
+SUBSTR(value,position,length)
+ 
+ 
+ 
+ 
+TO_CHAR=> convert DATE & NUMBER TO charcter values
+
+TO_DATE => char to DATE
+
+TO_NUMBER=> char to Number
+ 
+ 
+ 
+ 
+Functions:
+ 
+Aggregate Fun/Group functions
+
+single row functions
+
+--char functions
+
+--number functions
+
+--Conversion functions
+ 
+  to_char => number, date => char
+
+  to_number=>
+
+  to_date=>char=>date
+ 
+Aggregate Fun/Group functions : Omits the null value 
+
+multiple values as I/p =>single value as o/p
+ 
+SUM,MAX,MIN,COUNT,AVG
+ 
+SELECT max(sal) FROM scott.emp;
+ 
+SELECT sum(comm) FROM scott.emp;
+ 
+SELECT count(deptno),count(mgr) FROM scott.emp;
+
+--to return no.of rows in a table
+
+SELECT COUNT(*) from scott.emp;
+
+select*From scott.emp;
+ 
+SELECT COUNT(DISTINCT(comm)) from scott.emp;
+ 
+--GROUP BY
+
+SELECT DEPTNO,MAX(sal) FROM scott.emp WHERE ename like 'S%' GROUP BY deptno HAVING deptno=20  ORDER BY 1;
+ 
+WHERE=>it is used to restrict the rows ,before grouping 
+
+Having =>it is used to filter the groups => after grouping
+ 
+SELECT deptno,sal,ename from scott.emp WHERE sal>2850;
+
+SELECT DEPTNO,MAX(sal) FROM scott.emp WHERE sal>2850 GROUP BY deptno having deptno>10 ORDER BY 1;
+ 
+select TO_CHAR(sysdate,'mm/dd/yyyy') from dual;
+ 
+CREATE TABLE emp_date (DOJ date);
+ 
+INSERT INTO emp_date values(TO_DATE('22/01/1994','dd/mm/yyyy'));
+ 
+ 
+SELECT*FROM emp_date;
+ 

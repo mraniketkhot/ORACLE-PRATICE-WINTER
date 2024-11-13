@@ -1,0 +1,21 @@
+Group Fun:
+ 
+1.Write a query to display each job title and the average salary for that job. Sort the results by average salary in descending order.
+ 
+2.Write a query to display each job title and the count of employees in that role. Include only job titles with more than one employee.
+ 
+3.Calculate the total commission earned by salesmen in each department. Show only departments where the total commission exceeds 500. Use GROUP BY for department numbers and HAVING to filter by total commission.
+ 
+4.List the department numbers where the average salary of employees is greater than 2000. Use HAVING to filter the results based on average salary.
+
+ 
+Conversion Functions:
+1.Convert the job title of each employee to uppercase.
+
+2.Display the hire date of each employee in the format : mon/yyyy/dd
+
+3.Convert the string '5000' into a number.
+
+4.Extract and display the month and year from the hire date in the format Month YYYY (e.g., January 2024).
+
+ 

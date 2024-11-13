@@ -1,0 +1,33 @@
+Here are 10 scenarios for subqueries using only the **`scott.emp`** table:
+
+1. **Find Employees with a Salary Greater Than the Average Salary:**
+   - Retrieve employees whose salary is higher than the average salary across all employees in the `emp` table.
+
+2. **Get Employees with a Salary Greater Than 'JONES':**
+   - Identify employees whose salary is greater than the salary of the employee 'JONES'.
+
+3. **List Employees with a Salary Higher Than the Minimum Salary:**
+   - Find employees whose salary is higher than the minimum salary in the company.
+
+4. **Find Employees Who Earn the Same as the Highest Paid Employee:**
+   - Retrieve the employees who have the same salary as the highest-paid employee in the `emp` table.
+
+5. **Get Employees Who Were Hired After 'FORD':**
+   - Find employees who were hired after the employee 'FORD' based on their hire date.
+
+6. **List Employees Who Do Not Have a Manager:**
+   - Identify employees who do not have a manager (i.e., their `mgr` column is `NULL`).
+
+7. **Find Employees in the Same Department as 'SMITH':**
+   - Retrieve employees who work in the same department as the employee 'SMITH'.
+
+8. **Find Employees Whose Salary Is Greater Than the Department Average:**
+   - List employees whose salary is greater than the average salary of all employees in their department.
+
+9. **Get Employees Who Have the Lowest Salary in the Company:**
+   - Find employees who have the lowest salary across the entire company.
+
+10. **List Employees Who Were Hired Before the Employee with the Maximum Salary:**
+    - Retrieve employees who were hired before the employee earning the maximum salary in the company.
+
+These scenarios all work with the `scott.emp` table and involve different types of subqueries, often using aggregate functions or comparisons to focus on a specific subset of employees.

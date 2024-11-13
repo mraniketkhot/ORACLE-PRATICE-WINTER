@@ -1,0 +1,60 @@
+SET operators
+VIEWS
+SYNONYM
+
+INDEX
+SEQUENCE
+
+SET OPERATORS:
+ 
+Result set
+ 
+SELECT deptno,name FROM a 
+
+UNION
+
+SELECT id,name FROM b;
+ 
+ 
+1.no.of columns in all the Result set should be same
+
+2.datatype order also should be same
+
+3.reult will have the attribute names from the first query (deptno,name)
+
+4.order by clause always comes at the last
+
+5.if u want to change the execution order u can use parenthesis ()
+ 
+SELECT empid as id ,name as ename FROM A
+
+UNION
+
+SELECT*FROM B;
+ 
+ 
+SELECT name as ename FROM A
+
+UNION
+
+SELECT empid,name FROM B;
+ 
+ORA-01789: query block has incorrect number of result columns
+ 
+SELECT  name FROM A
+
+UNION
+
+SELECT empid FROM B;
+ 
+ORA-01790: expression must have same datatype as corresponding expression
+ 
+ 
+UNION=> duplicate rows wil be eliminated
+
+UNION ALL=>includes the duplicate rows
+
+INTERSECT=> common bw result set
+
+MINUS=>
+ 

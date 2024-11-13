@@ -1,0 +1,319 @@
+DAY 7-Joins
+ 
+Joins are used to retrieve a data from one or more tables
+ 
+CROSS JOIN/CARTESIAN JOIN-
+
+NATURAL JOIN
+
+INNER JOIN(EQUI join,Non equi join)
+
+OUTER JOIN- LEFT OUTER JOIN,RIGHT OUTER JOIN, FULL OUTER JOIN
+
+SELF JOIN
+ 
+CARTESIAN JOIN:
+ 
+CROSS JOIN: Every row of one table is joined to a row in another table.
+ 
+A-3rows B-4rows  Total : 12 rows
+ 
+1 1
+
+2 2
+ 
+3 3 
+
+4 4
+ 
+1 1 3 3
+
+1 1 4 4
+
+2 2 3 3
+
+2 2 4 4
+ 
+no.of rows in FIRST table * no.of rows SECOND table
+ 
+ 
+SELECT* FROM A,B;
+ 
+SELECT* FROM A CROSS JOIN B;
+ 
+BOth query will give the same result
+ 
+Using Aliases:
+ 
+TAble Aliases - Distingush columns that have identical names but reside in different table
+ 
+Column Aliases
+ 
+EX:
+ 
+SELECT e.employee_id,e.First_name,d.deptno FROM EMPLOYEES e, DEPT d where e.deptno=d.deptno;
+
+----------------------------------------------------------------------------
+
+NATURAL JOIN:
+ 
+SELECT * FROM A NATURAL JOIN B;
+ 
+--based on the common column it returns the row
+
+--Only one column willbe kept
+ 
+SELECT * FROM A   JOIN B using(name); -- if there are two matching columns and if you want the output from the one column, specify using clause
+ 
+ 
+SELECT * FROM A;
+
+empid   name
+
+1	rohit
+
+2	ramesh
+
+3	amrita
+
+5	anitha
+ 
+ 
+CREATE TABLE A (empid NUMBER,name VARCHAR2(10));
+ 
+INSERT INTO A VALUES(1,'rohit');
+
+INSERT INTO A VALUES(2,'ramesh');
+
+INSERT INTO A VALUES(3,'amrita');
+
+INSERT INTO A VALUES(4,'anitha');
+ 
+SELECT * FROM B;
+
+empid    name
+
+1	rohit
+
+4	vanaja
+
+5	amrita
+ 
+ 
+CREATE TABLE B (empid NUMBER,name VARCHAR2(10));
+ 
+INSERT INTO B VALUES(1,'rohit');
+
+INSERT INTO B VALUES(4,'vanaja');
+
+INSERT INTO B VALUES(5,'amrita');
+ 
+SELECT * FROM A;
+
+empid   name
+
+1	rohit
+
+2	ramesh
+
+3	amrita
+
+5	anitha
+ 
+SELECT * FROM B;
+
+empid    name
+
+1	rohit
+
+4	vanaja
+
+5	amrita
+ 
+ 
+SELECT * FROM A  JOIN B  using(empid);
+
+empid   name    name_1
+
+1	rohit	rohit
+
+5	anitha	amrita
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+ 
+INNER JOIN:
+ 
+ 
+The INNER join is a join when equijoins and nonequijoins are performed, rows from the source and target tables are matched using a join condition formulated with equality and inequality operators, respectively.
+ 
+Equijoin :
+
+An equijoin is such a join which performs against a join condition containing an equality operator. It combines rows of one table associated with one or more rows in another table based on the equality of column values or expressions.
+ 
+Non-equijoins:
+ 
+Non-equijoins is such a join which match column values from different tables based on an inequality (instead of the equal sign like >, <, >=, <= ) expression. The value of the join column in each row in the source table is compared to the corresponding values in the target table. A match is found if the expression based on an inequality operator used in the join, evaluates to true.
+ 
+ 
+SELECT a.department_id, a.department_name, b.city
+
+FROM departments a, locations b
+
+WHERE b.location_id BETWEEN 1800 AND 2500
+
+AND a.department_id < 30;
+ 
+CREATE TABLE EMPLOYEE (EMP_ID NUMBER(4) CONSTRAINT PK_EMP_ID PRIMARY KEY,ENAME VARCHAR2(20));
+
+INSERT INTO EMPLOYEE VALUES(1001,'Ram');
+
+INSERT INTO EMPLOYEE VALUES(1002,'Nitin');
+
+INSERT INTO EMPLOYEE VALUES(1003,'Siddarth');
+
+INSERT INTO EMPLOYEE VALUES(1004,'Vivek');
+
+INSERT INTO EMPLOYEE VALUES(1005,'Karthi');
+ 
+CREATE TABLE OFFICE_LOC(LOC_ID NUMBER(2) CONSTRAINT PK_LOC_ID PRIMARY KEY ,LOCATION VARCHAR2(20),EMP_ID NUMBER(5), CONSTRAINT FK_EMP_ID FOREIGN KEY(EMP_ID)REFERENCES EMPLOYEE(EMP_ID));
+ 
+INSERT INTO OFFICE_LOC VALUES(25,'Mumbai',1001);
+
+INSERT INTO OFFICE_LOC VALUES(30,'Pune',1002);
+
+INSERT INTO OFFICE_LOC VALUES(35,'HYDERABAD',1003);
+
+INSERT INTO OFFICE_LOC VALUES(40,'Delhi',1004);
+ 
+ 
+SELECT e.EMP_ID,e.ENAME,o.LOC_ID,o.LOCATION FROM EMPLOYEE e,OFFICE_LOC o WHERE o.emp_id = e.emp_id;// in ppt
+ 
+SELECT e.EMP_ID,e.ENAME,o.LOC_ID,o.LOCATION FROM EMPLOYEE e INNER JOIN OFFICE_LOC o on o.emp_id = e.emp_id;//explicitly specifying the
+ 
+SELECT * FROM EMPLOYEE e  INNER JOIN OFFICE_LOC o ON  o.emp_id = e.emp_id;
+ 
+SELECT e.employee_id,e.First_name,d.dno FROM EMPLOYEES e JOIN DEPT d ON e.department_id=d.dno WHERE  d.dno<60 AND d.dno>40;
+ 
+SELECT a1.id,b1.name from a a1 inner join B b1 on a1.name=b1.name;
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+with AND OPERATOR:
+ 
+SELECT e.EMP_ID,e.ENAME,o.LOC_ID,o.LOCATION FROM EMPLOYEE e,OFFICE_LOC o WHERE o.emp_id = e.emp_id AND e.emp_id>1002;//ppt
+ 
+ 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ 
+OUTER JOIN:
+
+-----------
+
+-used to display the elements in a table, regardless of wheather they present in the second table
+ 
+LEFT OUTER JOIN:
+ 
+Common rows + LEFT TABLE (1st table)
+ 
+ 
+SELECT L.ID,r.name FROM LEFT_TABLE L, RIGHT_TABLE R WHERE l.name=r.name(+);
+ 
+SELECT L.ID,r.name FROM LEFT_TABLE LEFT JOIN RIGHT_TABLE R ON l.name=r.name;
+ 
+------------------------------------------------------------------------------------------
+ 
+RIGHT OUTER JOIN:
+ 
+Common rows + RIGHT TABLE (2nd table)
+ 
+ 
+SELECT L.ID,r.name FROM LEFT_TABLE L, RIGHT_TABLE R WHERE l.name(+)=r.name;
+ 
+ 
+SELECT L.ID,r.name FROM LEFT_TABLE L RIGHT JOIN RIGHT_TABLE R ON l.name=r.name;
+ 
+-------------------------------------------------------------------------------------------
+ 
+ 
+FULL OUTER JOIN:
+ 
+Common rows + LEFT TABLE (1st table)+RIGHT TABLE (2nd table)
+ 
+ 
+SELECT L.ID,r.name FROM LEFT_TABLE L FULL JOIN RIGHT_TABLE R ON l.name=r.name;
+ 
+SELECT*FROM LEFT_TABLE;
+ 
+id  name
+
+1	rohit
+
+2	ramesh
+
+3	amrita
+ 
+SELECT*FROM RIGHT_TABLE;
+ 
+empid     name
+
+1	  rohit
+
+4	  vanaja
+
+5	  amrita
+ 
+OUTPUT:
+
+id    name
+
+1    rohit
+
+null  vanaja
+
+3     amrita
+
+2     null
+ 
+ 
+ 
+SELECT*FROM A;
+
+SELECT*FROM B;
+ 
+SELECT a1.empid,a1.name,b1.empid,b1.name FROM A a1,B b1 WHERE a1.empid=b1.empid(+) order by a1.empid;-- 9i version left join
+ 
+ 
+SELECT a1.empid,a1.name,b1.name FROM A a1 LEFT  OUTER JOIN B b1 ON a1.empid=b1.empid;-- using left join
+ 
+e
+ 
+SELECT a1.empid,a1.name,b1.name FROM A a1,B b1 WHERE a1.empid(+)=b1.empid;-- 9i version right join
+ 
+ 
+SELECT a1.empid,a1.name,b1.empid,b1.name FROM A a1 RIGHT  OUTER JOIN B b1 ON a1.empid=b1.empid;-- using right join
+ 
+ 
+SELECT a1.empid,a1.name,b1.empid,b1.name FROM A a1 FULL  OUTER JOIN B b1 ON a1.empid=b1.empid order by a1.empid;	
+ 
+-------------------------------------------------------------------------------------------
+
+SELF JOIN
+
+---------
+
+-table is joined itself
+ 
+SELECT e2.FIRST_NAME||' Reports to '||e1.FIRST_NAME FROM EMPLOYEES e1,EMPLOYEES e2 WHERE e2.MANAGER_ID=e1.EMPLOYEE_ID order by 1;
+ 
+https://dataschool.com/how-to-teach-people-sql/difference-between-where-and-on-in-sql/
+ 
+ALL sub queries to JOIN
+ 
+BUt All join quereies can not converted to subqueries
+ 
+ 
+ 
+ 
+SELECT a.id,a.name,b.deptno FROM  A , B WHERE a.id=b.id(+);
+ 

@@ -1,0 +1,55 @@
+JOIN:
+ 
+https://dataschool.com/how-to-teach-people-sql/difference-between-where-and-on-in-sql/
+ 
+ 
+NATURAL JOIN: Based on the common column
+ 
+SELECT * FROM A NATURAL JOIN B;
+ 
+USING =>if you want to specifically tell oracle use the particular column for joining
+ 
+SELECT * FROM A JOIN B USING(deptno);
+ 
+ 
+CROSS JOIN: 6
+ 
+A  (3)                B  (2) 
+id name       id deptno
+1   a         1   10
+2   b         2   10
+3   c
+ 
+OP:
+ 
+1 a  1 10
+2 b  1 10
+3 c  1 10
+1 a  2 10
+2 b  2 10
+3 c  2 10
+ 
+ 
+INNER JOIN : EQUI JOIN,NON EQUI JOIN
+ 
+--INNER JOIN
+SELECT a.id,a.deptno,b.ename FROM A JOIN B ON a.name=b.ename;
+ 
+SELECT * from scott.emp;
+SELECT*FROM scott.dept;
+ 
+SELECT e.ename,e.deptno,d.dname FROM scott.emp e JOIN scott.dept d ON e.deptno=d.deptno and e.ename='KING';
+ 
+SELECT e.ename,e.deptno,d.dname FROM scott.emp e,scott.dept d WHERE e.deptno=d.deptno and e.ename='KING';
+ 
+SELECT e.ename,e.deptno,d.dname FROM scott.emp e JOIN scott.dept d ON e.deptno>d.deptno;
+ 
+ 
+OUTER JOIN:
+ 
+SELECT a.id,a.name,b.deptno FROM A LEFT OUTER JOIN B ON a.id=b.id;--LEFT JOIN (Matched Rows+left )
+SELECT a.id,a.name,b.deptno FROM  A RIGHT OUTER JOIN B ON a.id=b.id;----RIGHT JOIN (Matched Rows+right )
+SELECT a.id,a.name,b.deptno FROM  A FULL OUTER JOIN B ON a.id=b.id;----FULL JOIN (Matched Rows+left+right )
+ 
+SELF JOIN:-- joined itself
+SELECT e2.ename||' Reports to '||e1.ename FROM scott.emp e1,scott.emp e2 WHERE e2.mgr=e1.empno;

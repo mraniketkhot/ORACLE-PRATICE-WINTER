@@ -1,0 +1,165 @@
+INDEX:
+ 
+To access a faster
+ 
+where do u create index => columns
+ 
+There is no restriction on no.of index
+ 
+UNIQUE key,Primary key=> INDEX also will be created automatically, USER_INDEXES
+ 
+BTREE INDEXES-Balanced tree index
+ 
+CREATE INDEX name_idx ON emp(ename);
+ 
+/* BITMAP INDEX=> gender :when u are having less cardinality .
+ 
+FUNCITON BASED INDEX=> where name='allen'
+ 
+CREATE INDEX name_idx ON emp(lower(ename));
+ 
+HASH INDEX
+ 
+CLUSTER Index
+ 
+COMPOSITE KEY INDEX
+ 
+*/
+ 
+-- choosing the column  
+ 
+when your column has less updates
+ 
+--when u should not choose the column
+ 
+long datatype
+
+null values
+ 
+ 
+CREATE TABLE emp as SELECT*FROM scott.emp;
+ 
+SELECT*FROM emp;
+ 
+CREATE INDEX empno_idx ON emp(empno);
+ 
+ 
+CREATE INDEX ename_idx ON emp(ename);
+
+SELECT*FROM user_indexes;
+ 
+SELECT*FROM USER_IND_COLUMNS;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DAY 8 - SEQUENCES
+ 
+- used to generate the sequence numbers. 1 2 3 4 5 6 7 8 9 10 ...40  1 ...10  
+
+- it can be used by mulitiple tables
+ 
+ 
+SELECT*FROM USER_SEQUENCES;  2
+ 
+-------------------------------------------
+ 
+CREATE SEQUENCE <SEQUENCE_NAME> 
+
+INCREMENT BY n
+
+START WITH n
+
+MINVALUE n
+
+MAXVALUE n
+
+CYCLE
+
+NOCYCLE
+
+CACHE 10
+ 
+ 
+1 2 3 4 5 6 7 8 9 10
+ 
+ 
+CURRVAL-Current values of the sequence
+
+NEXTVAL- to create a next sequence number
+ 
+ 
+<seq_name>.CURVAL
+<seq_name>.NEXTVAL
+
+--------------------------------------------
+ 
+CREATE SEQUENCE demo_seq 
+
+MINVALUE 1
+
+MAXVALUE 5
+
+START WITH 1
+
+INCREMENT BY 1
+
+NOCYCLE;
+ 
+CREATE SEQUENCE demo_sequence1 
+
+MINVALUE 80
+
+MAXVALUE 100
+
+START WITH 100
+
+INCREMENT BY -2 
+
+NOCYCLE;
+ 
+CREATE SEQUENCE S_6
+
+MINVALUE 1
+
+MAXVALUE 10
+
+START WITH 10  
+
+INCREMENT BY -2 ;--10 8 6 4 2
+ 
+ 
+CREATE SEQUENCE S_3
+
+MINVALUE 1
+
+MAXVALUE 5
+
+START WITH 3  
+
+INCREMENT BY 1 
+
+CYCLE 
+
+CACHE 4;
+ 
+ 
+ 
+Sequence DEMO_SEQ created.
+ 
+insert into demo values(demo_seq.nextval,'vijay',1000);
+
+1 row inserted.
+ 
+SELECT demo_seq.currval from dual;
+ 
+1
+ 
+10 9 8 7 6 5
+ 

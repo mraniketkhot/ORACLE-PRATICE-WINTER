@@ -1,0 +1,43 @@
+1. Display all employees along with their department names.
+ 
+SELECT e.EMPNO, e.ENAME, e.JOB, d.DEPTNAME
+FROM Emp e
+JOIN Dept d ON e.DEPTNO = d.ID;
+ 
+2. List deptno, department name along with their Location name.
+ 
+SELECT d.ID AS DEPTNO, d.DEPTNAME, l.LOC_NAME AS LOCATION_NAME
+FROM Dept d
+LEFT JOIN Location l ON d.LOC_ID = l.LOC_ID;
+ 
+3. Display all employees name, dept name, and the location name.
+ 
+SELECT e.EMPNO, e.ENAME, e.JOB, d.DEPTNAME, l.LOC_NAME AS LOCATION_NAME
+FROM Emp e
+JOIN Dept d ON e.DEPTNO = d.ID
+LEFT JOIN Location l ON d.LOC_ID = l.LOC_ID;
+ 
+4. Find all deptnames, including those that do not belong to any location.
+ 
+SELECT d.ID AS DEPTNO, d.DEPTNAME, l.LOC_NAME AS LOCATION_NAME
+FROM Dept d
+LEFT JOIN Location l ON d.LOC_ID = l.LOC_ID;
+ 
+5. Display all departments and their employees (including departments without employees).
+This query lists each department along with the employees in it. Departments with no employees are still displayed.
+ 
+SELECT d.ID AS DEPTNO, d.DEPTNAME, e.EMPNO, e.ENAME
+FROM Dept d
+LEFT JOIN Emp e ON d.ID = e.DEPTNO;
+ 
+6. Display all employees along with their department names and location names, including employees without departments or departments without locations (FULL OUTER JOIN).
+ 
+SELECT e.EMPNO, e.ENAME, e.JOB, d.DEPTNAME, l.LOC_NAME AS LOCATION_NAME
+FROM Emp e
+FULL OUTER JOIN Dept d ON e.DEPTNO = d.ID
+FULL OUTER JOIN Location l ON d.LOC_ID = l.LOC_ID;
+ 
+7.SELECT COUNT(*) AS Total_Depts_No_Emp
+FROM Dept d
+LEFT JOIN Emp e ON d.ID = e.DEPTNO
+WHERE e.EMPNO IS NULL;

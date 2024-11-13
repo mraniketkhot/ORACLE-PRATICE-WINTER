@@ -1,0 +1,367 @@
+SQL-
+ 
+PLSQL->block structured language
+ 
+Top to bottom approach
+ 
+DECLARE=>variables, cursors,collection data type
+
+BEGIN
+
+implementation
+
+EXCEPTION
+
+  run time errors
+
+END
+ 
+optional- declaration , exception
+
+BEGIN
+
+END--- execution part is mandatory
+ 
+--display hi
+
+BEGIN
+
+    DBMS_OUTPUT.PUT_LINE('Hi');
+
+END;
+
+/
+ 
+ 
+DATA types:
+ 
+NUMBER
+
+VARCHAR2
+
+CHAR
+
+DATE
+
+LOB
+
+PLS_INTEGER
+
+BINARY_INTEGER
+ 
+DECLARE
+
+v_a NUMBER:=10;
+
+v_b NUMBER:=20;
+
+v_c NUMBER;
+
+BEGIN
+
+v_c:=v_a+v_b;
+
+DBMS_OUTPUt.PUT_LINE('RESULT IS:'||v_c);
+
+END;
+
+/
+ 
+DECLARE
+
+v_a VARCHAR2(10):='suganya';
+
+BEGIN
+
+DBMS_OUTPUt.PUT_LINE(v_a);
+
+END;
+
+/
+ 
+ 
+DECLARE
+
+v_a CONSTANT NUMBER:=10;
+
+BEGIN
+
+v_a:=20;
+
+DBMS_OUTPUt.PUT_LINE(v_a);
+
+END;
+
+/
+
+ORA-06550: line 4, column 1:
+
+PLS-00363: expression 'V_A' cannot be used as an assignment target
+ 
+DECLARE
+
+--v_a NUMBER=10
+
+v_a NUMBER DEFAULT 10;
+
+BEGIN
+
+v_a:=20;
+
+DBMS_OUTPUt.PUT_LINE(v_a);
+
+END;
+
+/
+ 
+--get data from the table and store the data in var and print 
+
+DECLARE
+
+    v_name VARCHAR2(10);
+
+	v_job VARCHAR2(15);
+
+BEGIN
+
+    SELECT ename,job INTO v_name,v_job FROM scott.emp WHERE empno=7839;
+
+    DBMS_OUTPUT.PUT_LINE(v_name||' '||v_job);
+
+END;
+
+/
+ 
+DECLARE
+
+v_name scott.emp.ename%TYPE;
+
+v_doj scott.emp.hiredate%TYPE;
+
+BEGIN
+
+    SELECT ename,hiredate INTO v_name,v_doj from scott.emp where empno=7839; 
+
+	DBMS_OUTPUT.PUT_LINE(v_name);
+
+	DBMS_OUTPUT.PUT_LINE(v_doj);
+
+END;
+
+/
+ 
+--when you not aware of the datatype n size
+
+--future even if the column size data type it wont affect the program
+ 
+ 
+U can store single record in a variable => record
+ 
+ 
+DECLARE
+
+--record can hold a single record at a time
+
+v_emprec scott.emp%ROWTYPE;
+ 
+BEGIN
+
+    SELECT * INTO v_emprec from scott.emp WHERE empno=7839; 
+
+	DBMS_OUTPUT.PUT_LINE(v_emprec.sal);
+
+	DBMS_OUTPUT.PUT_LINE(v_emprec.deptno);
+
+END;
+
+/
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+i have pasted the codes in the chat 
+ 
+MAM CAN YOU SHARE IT AGAIN
+ 
+sure
+ 
+PLSQL->block structured language
+ 
+Top to bottom approach
+ 
+DECLARE=>variables, cursors,collection data type
+
+BEGIN
+
+implementation
+
+EXCEPTION
+
+  run time errors
+
+END
+ 
+optional- declaration , exception
+
+BEGIN
+
+END--- execution part is mandatory
+ 
+--display hi
+
+BEGIN
+
+    DBMS_OUTPUT.PUT_LINE('Hi');
+
+END;
+
+/
+ 
+ 
+DATA types:
+ 
+NUMBER
+
+VARCHAR2
+
+CHAR
+
+DATE
+
+LOB
+
+PLS_INTEGER
+
+BINARY_INTEGER
+ 
+DECLARE
+
+v_a NUMBER:=10;
+
+v_b NUMBER:=20;
+
+v_c NUMBER;
+
+BEGIN
+
+v_c:=v_a+v_b;
+
+DBMS_OUTPUt.PUT_LINE('RESULT IS:'||v_c);
+
+END;
+
+/
+ 
+DECLARE
+
+v_a VARCHAR2(10):='suganya';
+
+BEGIN
+
+DBMS_OUTPUt.PUT_LINE(v_a);
+
+END;
+
+/
+ 
+ 
+DECLARE
+
+v_a CONSTANT NUMBER:=10;
+
+BEGIN
+
+v_a:=20;
+
+DBMS_OUTPUt.PUT_LINE(v_a);
+
+END;
+
+/
+
+ORA-06550: line 4, column 1:
+
+PLS-00363: expression 'V_A' cannot be used as an assignment target
+ 
+DECLARE
+
+--v_a NUMBER=10
+
+v_a NUMBER DEFAULT 10;
+
+BEGIN
+
+v_a:=20;
+
+DBMS_OUTPUt.PUT_LINE(v_a);
+
+END;
+
+/
+ 
+--get data from the table and store the data in var and print 
+
+DECLARE
+
+    v_name VARCHAR2(10);
+
+	v_job VARCHAR2(15);
+
+BEGIN
+
+    SELECT ename,job INTO v_name,v_job FROM scott.emp WHERE empno=7839;
+
+    DBMS_OUTPUT.PUT_LINE(v_name||' '||v_job);
+
+END;
+
+/
+ 
+DECLARE
+
+v_name scott.emp.ename%TYPE;
+
+v_doj scott.emp.hiredate%TYPE;
+
+BEGIN
+
+    SELECT ename,hiredate INTO v_name,v_doj from scott.emp where empno=7839; 
+
+	DBMS_OUTPUT.PUT_LINE(v_name);
+
+	DBMS_OUTPUT.PUT_LINE(v_doj);
+
+END;
+
+/
+ 
+--when you not aware of the datatype n size
+
+--future even if the column size data type it wont affect the program
+ 
+ 
+U can store single record in a variable => record
+ 
+ 
+DECLARE
+
+--record can hold a single record at a time
+
+v_emprec scott.emp%ROWTYPE;
+ 
+BEGIN
+
+    SELECT * INTO v_emprec from scott.emp WHERE empno=7839; 
+
+	DBMS_OUTPUT.PUT_LINE(v_emprec.sal);
+
+	DBMS_OUTPUT.PUT_LINE(v_emprec.deptno);
+
+END;
+
+/
+
+ 

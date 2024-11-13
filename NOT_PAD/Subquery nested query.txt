@@ -1,0 +1,75 @@
+SUB QUERY/Nested QUERY:
+ 
+--QUERY INSIDE A QUERY
+ 
+ 
+SELECT * FROM scott.emp;
+--normal SubQ , inner Query will be executed -> result -> i/p outer Query
+SELECT*FROM scott.emp WHERE DEPTNO=(SELECT DEPTNO FROM scott.emp WHERE ename='BLAKE');
+SELECT COUNT(*) FROM scott.emp WHERE MGR=(SELECT MGR FROM scott.emp WHERE ename='ALLEN');
+SELECT*FROM scott.emp WHERE (MGR,DEPTNO)=(SELECT MGR,DEPTNO FROM scott.emp WHERE ename='BLAKE');
+ 
+ 
+--WHEN your INNer Query retruns more than one row you can these opeartors :IN,EXISTS,ALL,ANY, NOT
+SELECT*FROM scott.emp WHERE SAL IN (SELECT sal FROM scott.emp WHERE DEPTNO=10);
+SELECT*FROM scott.emp WHERE SAL NOT IN (SELECT sal FROM scott.emp WHERE DEPTNO=10);
+ 
+--5000,3000,1300
+--ANY=OR  sal>5000 OR sal>3000 OR sal>1300
+SELECT*FROM scott.emp WHERE SAL > ANY (SELECT sal FROM scott.emp WHERE DEPTNO=10)
+--ALL=AND sal>5000 AND sal>3000 AND sal>1300
+SELECT*FROM scott.emp WHERE SAL > ALL (5000,3000,1300);
+ 
+ 
+--EXISTS will return TRUE= WHEN you inner query returns row
+--EXISTS will return FALSE= WHEN you inner query  doesnot return any row
+ 
+SELECT ename FROM scott.emp WHERE  EXISTS (SELECT DEPTNO FROM scott.dept WHERE LOC='NEW YORK');
+
+
+Corealated SUBQ:
+ 
+inner query will run as many times outer query runs
+
+inner query is completely dependent on outer query
+ 
+SELECT ename,sal,deptno FROM scott.emp e1 WHERE sal > (SELECT avg(sal) FROM scott.emp e2 WHERE e1.deptno=e2.deptno) ORDER BY deptno;
+
+ 
+SUB QUERY/Nested QUERY:
+ 
+--QUERY INSIDE A QUERY
+ 
+ 
+SELECT * FROM scott.emp;
+--normal SubQ , inner Query will be executed -> result -> i/p outer Query
+SELECT*FROM scott.emp WHERE DEPTNO=(SELECT DEPTNO FROM scott.emp WHERE ename='BLAKE');
+SELECT COUNT(*) FROM scott.emp WHERE MGR=(SELECT MGR FROM scott.emp WHERE ename='ALLEN');
+SELECT*FROM scott.emp WHERE (MGR,DEPTNO)=(SELECT MGR,DEPTNO FROM scott.emp WHERE ename='BLAKE');
+ 
+ 
+--WHEN your INNer Query retruns more than one row you can these opeartors :IN,EXISTS,ALL,ANY, NOT
+SELECT*FROM scott.emp WHERE SAL IN (SELECT sal FROM scott.emp WHERE DEPTNO=10);
+SELECT*FROM scott.emp WHERE SAL NOT IN (SELECT sal FROM scott.emp WHERE DEPTNO=10);
+ 
+--5000,3000,1300
+--ANY=OR  sal>5000 OR sal>3000 OR sal>1300
+SELECT*FROM scott.emp WHERE SAL > ANY (SELECT sal FROM scott.emp WHERE DEPTNO=10)
+--ALL=AND sal>5000 AND sal>3000 AND sal>1300
+SELECT*FROM scott.emp WHERE SAL > ALL (5000,3000,1300);
+ 
+ 
+--EXISTS will return TRUE= WHEN you inner query returns row
+--EXISTS will return FALSE= WHEN you inner query  doesnot return any row
+ 
+SELECT ename FROM scott.emp WHERE  EXISTS (SELECT DEPTNO FROM scott.dept WHERE LOC='NEW YORK');
+ 
+Corealated SUBQ:
+ 
+inner query will run as many times outer query runs
+inner query is completely dependent on outer query
+ 
+SELECT ename,sal,deptno FROM scott.emp e1 WHERE sal > (SELECT avg(sal) FROM scott.emp e2 WHERE e1.deptno=e2.deptno) ORDER BY deptno;
+
+ 
+ 
