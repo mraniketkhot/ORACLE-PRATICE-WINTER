@@ -1,0 +1,8 @@
+SELECT *FROm EMP;
+
+DESC emp;
+INSERT INTO EMP Values(10,'Mohit','15-NOV-2020');
+
+INSERT INTO EMP (eid,DOJ)Values(10,'15-NOV-2020');
+
+DELETE FROM EMP WHERE Ename is not null;
